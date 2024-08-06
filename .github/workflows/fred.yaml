@@ -26,7 +26,7 @@ jobs:
         run: mkdir _build
 
       - name: Restore Packages
-        run: nuget restore ${{ github.workspace }}\ExportUpload\ItemUploadBrowser.sln
+        run: nuget restore ${{ github.workspace }}\ItemUploadBrowser.sln
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
@@ -34,7 +34,7 @@ jobs:
           languages: 'csharp'
 
       - name: Build App
-        run: msbuild ${{ github.workspace }}\ExportUpload\ItemUploadBrowser.sln /nologo /nr:false /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:DeleteExistingFiles=True /p:platform="Any CPU" /p:configuration="PRDAPP3WithPRDDB3" /p:PublishUrl="../_build"
+        run: msbuild ${{ github.workspace }}\ItemUploadBrowser.sln /nologo /nr:false /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:DeleteExistingFiles=True /p:platform="Any CPU" /p:configuration="PRDAPP3WithPRDDB3" /p:PublishUrl="../_build"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
