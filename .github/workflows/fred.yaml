@@ -1,1 +1,60 @@
+jobs:
+  build:
 
+    runs-on: windows-2019
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: microsoft/setup-msbuild@v2
+        with:
+          msbuild-architecture: x64
+
+      - name: Navigate to workspace
+      run: cd $GITHUB_WORKSPACE
+
+      -name: Create a build directory
+      run: mkdir _build
+
+      - name: Restore Packages
+      run: nuget restore ${{ github.workspace }}\ExportUpload\ExportUpload.sln
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: 'csharp'
+
+      - name: Build App
+      run: msbuild ${{ github.workspace }}\ExportUpload\ExportUpload.sln /nologo /nr:false /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /pWebPublishMethd=FileSystem /p:DeleteExistingFiles=True /p:platform="Any CPU" /p:configuration="PRDAPP3WithPRDDB3" /p:PublishUrl="../_build"
+
+      - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Build Output
+        path: "./_build"
+
+      - name: Create a codeql directory
+      run: mkdir _codeql-databases
+
+      - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+      
