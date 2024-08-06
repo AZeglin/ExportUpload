@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 using System.IO;
 using System.Data;
 using System.Configuration;
@@ -28,7 +29,7 @@ namespace VA.NAC.ItemExportUploadBrowser
 
                 string fileName = Path.GetFileName( strFilePath );
 
-                Response.AddHeader( "Content-Disposition", "attachment;filename=" + SimplifyDestinationFileName( fileName, exportUploadType ) );
+                Response.AddHeader( "Content-Disposition", "attachment;filename=" + SimplifyDestinationFileName( fileName, WebUtility.HtmlEncode( exportUploadType ) ) );
 
              //   Response.WriteFile( strFilePath );
 
