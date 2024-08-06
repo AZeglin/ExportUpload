@@ -1,4 +1,5 @@
 ﻿using System;
+using System.net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,7 +14,7 @@ namespace VA.NAC.ItemExportUploadBrowser
         {
             string message = HttpContext.Current.Request.QueryString[ "message" ];
 
-            PreviousUploadLabel.Text = message;
+            PreviousUploadLabel.Text = WebUtility.HtmlEncode( message );
         }
     }
 }
