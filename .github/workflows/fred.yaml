@@ -20,13 +20,13 @@ jobs:
           msbuild-architecture: x64
 
       - name: Navigate to workspace
-      run: cd $GITHUB_WORKSPACE
+        run: cd $GITHUB_WORKSPACE
 
-      -name: Create a build directory
-      run: mkdir _build
+      - name: Create a build directory
+        run: mkdir _build
 
       - name: Restore Packages
-      run: nuget restore ${{ github.workspace }}\ExportUpload\ItemUploadBrowser.sln
+        run: nuget restore ${{ github.workspace }}\ExportUpload\ItemUploadBrowser.sln
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
@@ -34,19 +34,19 @@ jobs:
           languages: 'csharp'
 
       - name: Build App
-      run: msbuild ${{ github.workspace }}\ExportUpload\ItemUploadBrowser.sln /nologo /nr:false /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:DeleteExistingFiles=True /p:platform="Any CPU" /p:configuration="PRDAPP3WithPRDDB3" /p:PublishUrl="../_build"
+        run: msbuild ${{ github.workspace }}\ExportUpload\ItemUploadBrowser.sln /nologo /nr:false /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:DeleteExistingFiles=True /p:platform="Any CPU" /p:configuration="PRDAPP3WithPRDDB3" /p:PublishUrl="../_build"
 
       - name: Upload artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: Build Output
-        path: "./_build"
+        uses: actions/upload-artifact@v4
+          with:
+            name: Build Output
+            path: "./_build"
 
       - name: Create a codeql directory
-      run: mkdir _codeql-databases
+        run: mkdir _codeql-databases
 
       - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v3
+        uses: github/codeql-action/analyze@v3
 
       
       
