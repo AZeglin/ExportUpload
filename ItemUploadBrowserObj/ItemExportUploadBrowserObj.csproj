@@ -186,10 +186,10 @@
     <Reference Include="Microsoft.ScriptManager.WebForms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.ScriptManager.WebForms.5.0.0\lib\net45\Microsoft.ScriptManager.WebForms.dll</HintPath>
     </Reference>
-    <Reference Include="NACCMExportUploadSharedObj, Version=1.0.0.0, Culture=neutral, PublicKeyToken=dcca13772be236c4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\NACCMExportUploadSharedObj\v4.0_1.0.0.0__dcca13772be236c4\NACCMExportUploadSharedObj.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\NACCMExportUploadSharedObj\NACCMExportUploadSharedObj.csproj">
+      <Project>{8c0610e8-7fa6-4dfb-9425-3f0d43cae4da}</Project>
+      <Name>NACCMExportUploadSharedObj</Name>
+    </ProjectReference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
