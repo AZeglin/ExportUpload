@@ -19,6 +19,14 @@ namespace VA.NAC.ItemExportUploadBrowser
     {
         protected void Page_Load( object sender, EventArgs e )
         {
+
+            if( Session[ "ItemExportUploadStartedProperly" ] == null )
+            {            
+                Response.StatusCode = ( int )System.Net.HttpStatusCode.Forbidden;
+                Response.BufferOutput = true;
+                Response.Redirect( "403A2.htm" );
+            }
+            
             if( HttpContext.Current != null )
             {
                 // set the content type to excel
