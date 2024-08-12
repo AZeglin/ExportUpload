@@ -23,6 +23,8 @@ namespace VA.NAC.ItemExportUploadBrowser
 
         protected void Page_Load( object sender, EventArgs e )
         {
+            Session[ "ItemExportUploadStartedProperly" ] = true;
+            
             if( Page.IsPostBack == false )
             {
                 ClearSessionVariables();
