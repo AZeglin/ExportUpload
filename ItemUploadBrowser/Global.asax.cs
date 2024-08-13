@@ -71,9 +71,32 @@ namespace VA.NAC.ItemExportUploadBrowser
 
         protected void Application_BeginRequest( object sender, EventArgs e )
         {
+            NameObjectCollectionBase.KeysCollection headerKeys = null;
 
+            headerKeys = HttpContext.Current.Response.Headers.Keys;
+
+            bool bFoundKey = false;
+
+            if( headerKeys != null )
+            {
+                if( headerKeys.Count > 0 )
+                {
+                    for( int i = 0; i < headerKeys.Count; i++ )
+                    {
+                        string headerKey = headerKeys[ i ];
+                        if( headerKey.CompareTo( "Content-Security-Policy" ) == 0 )
+                        {
+                            bFoundKey = true;
+                        }
+                    }                    
+                }                
+            }
+
+            if( bFoundKey == false )
+            {
+                HttpContext.Current.Response.Headers.Add( "Content-Security-Policy", "frame-ancestors  ammhintestapp3.vha.med.va.gov" );                
+            }
         }
-
         protected void Application_AuthenticateRequest( object sender, EventArgs e )
         {
 
